@@ -8,7 +8,7 @@ const isReady = ref(false);
 const initSlot = () => {
   return {
     seconds: 0,
-    mintues: 0,
+    minutes: 0,
     hours: 0,
     days: 0,
   }
@@ -18,8 +18,8 @@ const slot = reactive(initSlot());
 const seconds = computed(() => {
   return { '--value': slot.seconds, }
 });
-const mintues = computed(() => ({
-  '--value': slot.mintues,
+const minutes = computed(() => ({
+  '--value': slot.minutes,
 }));
 const hours = computed(() => ({
   '--value': slot.hours,
@@ -30,7 +30,7 @@ const days = computed(() => ({
 
 function onProgress(data: any) {
   slot.seconds = data.seconds;
-  slot.mintues = data.minutes;
+  slot.minutes = data.minutes;
   slot.hours = data.hours;
   slot.days = data.days;
 }
@@ -52,15 +52,15 @@ const state = reactive(initSate());
 let last = 0;
 const daysInput = ref();
 const hoursInput = ref();
-const mintuesInput = ref();
+const minutesInput = ref();
 const secondsInput = ref();
 
 function getTimeValue() {
   const days = daysInput.value.value;
   const hours = hoursInput.value.value;
-  const mintues = mintuesInput.value.value;
+  const minutes = minutesInput.value.value;
   const seconds = secondsInput.value.value;
-  return last === 0 ? (seconds * 1000 + mintues * 60 * 1000 + hours * 60 * 60 * 1000 + days * 24 * 60 * 60 * 1000) + 1000 : last;
+  return last === 0 ? (seconds * 1000 + minutes * 60 * 1000 + hours * 60 * 60 * 1000 + days * 24 * 60 * 60 * 1000) + 1000 : last;
 }
 
 async function onSwitch() {
@@ -128,7 +128,7 @@ onMounted(() => {
         </div>
         <div class="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
           <span class="countdown font-mono text-5xl">
-            <span :style="mintues"></span>
+            <span :style="minutes"></span>
           </span>
           min
         </div>
@@ -146,8 +146,8 @@ onMounted(() => {
         <input ref="hoursInput" class="input input-bordered input-md w-full max-w-xs" type="number" min="0" max="23"
           oninput="if(value<0)value=0; if(value>23)value=23;" placeholder="Hours">
 
-        <input ref="mintuesInput" class="input input-bordered input-md w-full max-w-xs" type="number" min="0" max="59"
-          oninput="if(value<0)value=0; if(value>59)value=59;" placeholder="Mintues">
+        <input ref="minutesInput" class="input input-bordered input-md w-full max-w-xs" type="number" min="0" max="59"
+          oninput="if(value<0)value=0; if(value>59)value=59;" placeholder="Minutes">
 
         <input ref="secondsInput" class="input input-bordered input-md w-full max-w-xs" type="number" min="0" max="59"
           oninput="if(value<0)value=0; if(value>59)value=59;" placeholder="Seconds">
